@@ -1,6 +1,10 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+//pour size qui change : structure Matrix avec numlines, numcolumns et int **values
+//les valeurs sont dans un tableau de pointeurs (values)
+
 #define SIZE 5
 
 void matrix_mult(int64_t mRes[SIZE][SIZE], int64_t m1[][SIZE], int64_t m2[][SIZE]) {

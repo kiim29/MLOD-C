@@ -1,18 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 enum mois {
     Janvier,
-    Février,
+    Fevrier,
     Mars,
     Avril,
     Mai,
     Juin,
     Juillet,
-    Août,
+    Aout,
     Septembre,
     Octobre,
     Novembre,
-    Décembre
+    Decembre
 };
 
 typedef enum mois Mois;
@@ -24,6 +25,25 @@ struct date {
 };
 
 typedef struct date Date;
+
+void initialiseDate(Date *p) {
+    printf("Saisir l'année :");
+    scanf("%i", &(p->Annee));
+    printf("Saisir le num du mois :");
+    scanf("%i", (int *)&(p->Mois));
+    printf("Saisir le jour :");
+    scanf("%i", &(p->Jour));
+}
+
+void afficheDate(Date *p) {
+    printf("La date (jj/mm/aaaa) est :\n");
+    printf("%i", p->Jour);
+    printf("/");
+    printf("%i", p->Mois);
+    printf("/");
+    printf("%i", p->Annee);
+    printf("\n");
+}
 
 int main(void) {
     Date d;
