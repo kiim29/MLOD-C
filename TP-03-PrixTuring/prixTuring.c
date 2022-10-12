@@ -48,12 +48,37 @@ int scanLineAsInt() {
 	return buf;
 }
 
+typedef struct {
+	unsigned int Annee;
+	char *Nom;
+	char *Raison;
+} Winner;
 
-int main(void)
-{
+void readWinners(Winner *tab, unsigned int N){
 
+}
+
+void printUnWinner(Winner w) {
+	printf("%i\n", w.Annee);
+	printf("%i\n", w.Nom);
+	printf("%i\n", w.Raison);
+}
+
+void printWinners(Winner *t, unsigned int N){
+	int i;
+	for(i=0; i<N; i++) {
+		printUnWinner(t[i]);
+		printf("\n");
+	}
+}
+
+int main(void) {
 	int nbGagnants = scanLineAsInt();
 	printf("nbGagnants = %i\n",nbGagnants);
+
+	Winner *tab;
+	readWinners(tab, nbGagnants);
+	printWinners(tab, nbGagnants);
 
 	return EXIT_SUCCESS;
 }
