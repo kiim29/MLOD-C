@@ -54,8 +54,15 @@ typedef struct {
 	char *Raison;
 } Winner;
 
-void readWinners(Winner *tab, unsigned int N){
+void readUnWinner(Winner *t, int index){
+	
+}
 
+void readWinners(Winner *t, unsigned int N){
+	int i;
+	for(i=0; i<N; i+=3) {
+		readUnWinner(t, i);
+	}
 }
 
 void printUnWinner(Winner w) {
@@ -73,6 +80,7 @@ void printWinners(Winner *t, unsigned int N){
 }
 
 int main(void) {
+
 	int nbGagnants = scanLineAsInt();
 	printf("nbGagnants = %i\n",nbGagnants);
 
