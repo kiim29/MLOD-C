@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-enum MesMois {
+enum mois {
     Janvier,
     Février,
     Mars,
@@ -15,13 +15,15 @@ enum MesMois {
     Décembre
 };
 
-typedef enum MesMois Mois;
+typedef enum mois Mois;
 
-struct Date {
+struct date {
     int Annee;
     Mois Mois;
     int Jour;
 };
+
+typedef struct date Date;
 
 int main(void) {
     Date d;
