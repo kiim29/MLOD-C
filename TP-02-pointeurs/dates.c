@@ -91,7 +91,8 @@ unsigned int nbreJours(Mois mo, unsigned int an) {
 
 bool dateValide(Date uneDate){
     return ((uneDate.Annee>0 && uneDate.Annee<9000) &&
-            (uneDate.Jour>0 && uneDate.Jour<=nbreJours(uneDate.Mois, uneDate.Annee)));
+        (uneDate.Jour>0 && uneDate.Jour<=nbreJours(uneDate.Mois, uneDate.Annee)))
+    ;
 }
 
 int main(void) {

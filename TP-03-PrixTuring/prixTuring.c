@@ -20,8 +20,7 @@
 /* This function scans a line of text (until \n) and returns a char* that contains all characters on the line (up to 255) excluding \n.
 It also ensures the \0 termination.
 **WARNING**: The result of this function has been allocated (calloc) by the function */
-char* scanLine()
-{
+char* scanLine() {
 	int maxLineSize = 255;
 	char c, *line = calloc(maxLineSize+1,sizeof(char));
 
@@ -37,7 +36,6 @@ char* scanLine()
 		// let's skip all chars untli the end of line
 		while (( (c = getchar()) != '\n') && c != EOF) ;
 	}
-
 	return line;
 }
 
@@ -54,14 +52,16 @@ typedef struct {
 	char *Raison;
 } Winner;
 
-void readUnWinner(Winner *t, int index){
-	
+void readUnWinner(Winner **t, int index){
+	//truc du genre t[index].Annee = scanLine()
+	// puis t[index].Nom = scanLine()
+	// puis t[index].Raison = scanLine()
 }
 
-void readWinners(Winner *t, unsigned int N){
+void readWinners(Winner **tab, unsigned int N){
 	int i;
 	for(i=0; i<N; i+=3) {
-		readUnWinner(t, i);
+		readUnWinner(tab, i);
 	}
 }
 
@@ -84,9 +84,11 @@ int main(void) {
 	int nbGagnants = scanLineAsInt();
 	printf("nbGagnants = %i\n",nbGagnants);
 
-	Winner *tab;
-	readWinners(tab, nbGagnants);
-	printWinners(tab, nbGagnants);
+	Winner *t;
+	//ptet t = (Winner *) malloc(nbGagnants, sizeof(Winner));
+	readWinners(t, nbGagnants);
+	printWinners(t, nbGagnants);
+	// free(t);
 
 	return EXIT_SUCCESS;
 }
