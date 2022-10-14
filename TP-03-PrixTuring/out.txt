@@ -1,4 +1,10 @@
 nbGagnants = 50
+1966
+Alan J. Perlis
+Construction de compilateurs
+1967
+Maurice Wilkes
+Bibliothèque logicielle
 1968
 Richard Hamming
 Méthodes numériques, systèmes de codage automatique, détection et correction d’erreurs
@@ -11,9 +17,15 @@ Analyse numérique, algèbre linéaire, analyse d’erreur vers l’arrière
 1971
 John McCarthy
 Intelligence artificielle
+1972
+Edsger Dijkstra
+La science et l’art des langages de programmation, langage ALGOL
 1973
 Charles Bachman
 Technologie des bases de données
+1974
+Donald Knuth
+Analyse des algorithmes et conception des langages de programmation
 1975
 Allen Newell
 Intelligence artificielle, la psychologie de la compréhension humaine, traitement de liste
@@ -29,6 +41,9 @@ Méthodologies pour la création de logiciels efficaces et fiables
 1979
 Kenneth Iverson
 Langages de programmation et notation mathématique, implémentation de systèmes interactifs, utilisation éducative d’APL, théorie et pratique du langage de programmation
+1980
+Charles A. R. Hoare
+Définition et conception des langages de programmation
 1981
 Edgar Frank Codd
 Systèmes de gestion de bases de données, en particulier bases de données relationnelles
@@ -47,6 +62,9 @@ Théorie des algorithmes, NP-complétude
 1986
 John Hopcroft
 Création et analyse de structures de données
+1987
+John Cocke
+Théorie des compilateurs, architecture des grands systèmes, invention des architectures RISC
 1988
 Ivan Sutherland
 Conception assistée par ordinateur (CAO)
@@ -92,6 +110,9 @@ Programmation orientée objet et création des langages Simula I et Simula 67
 2002
 Ronald L. Rivest
 Cryptographie à clef publique et système RSA
+2003
+Alan Kay
+Programmation orientée objet et création du langage Smalltalk
 2004
 Vinton G. Cerf
 Réseaux, TCP/IP
@@ -107,9 +128,6 @@ Pour leurs travaux sur le model checking
 2008
 Barbara Liskov
 Pour la conception de langages de programmation et la méthodologie polymorphe
-2003
-Alan Kay
-Programmation orientée objet et création du langage Smalltalk
 2009
 Charles P. Thacker
 Pour le travail effectué tout au long de sa carrière dont le Xerox Alto
@@ -122,24 +140,6 @@ Pour des contributions fondamentales à l'intelligence artificielle par le déve
 2012
 Silvio Micali et Shafi Goldwasser
 Pour cryptologie et la vérification de preuve, basés de la théorie de la complexité
-1967
-Maurice Wilkes
-Bibliothèque logicielle
-1987
-John Cocke
-Théorie des compilateurs, architecture des grands systèmes, invention des architectures RISC
-1972
-Edsger Dijkstra
-La science et l’art des langages de programmation, langage ALGOL
-1974
-Donald Knuth
-Analyse des algorithmes et conception des langages de programmation
-1966
-Alan J. Perlis
-Construction de compilateurs
-1980
-Charles A. R. Hoare
-Définition et conception des langages de programmation
 2013
 Leslie Lamport
 Contributions fondamentales théoriques appliquées aux systèmes distribués et concurrents - concepts de causalité, d'horloges logiques et de consistance séquentielle

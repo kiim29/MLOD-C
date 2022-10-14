@@ -123,20 +123,46 @@ void sortTuringWinnersByYear(Winner *t, Winner *tTri, unsigned int N){
 	}
 }
 
+Winner *addNewWinner(Winner *tTri, int *pN) {
+	printf("blabla1\n");
+	Winner *tAgrandi = (Winner *) calloc(*pN+1, sizeof(Winner));
+	printf("er1\n");
+	for (int i=0; i<*pN-1; i++) {
+		tAgrandi[i] = tTri[i];
+	}
+	printf("er2\n");
+	scanf("Entrez la nouvelle annee : %i", &tAgrandi[*pN-1].Annee);
+	scanf("Entrez le.a nouveau.elle gagnant.e : %s", tAgrandi[*pN-1].Nom);
+	scanf("Entrez la raison : %s", tAgrandi[*pN-1].Raison);
+	return tAgrandi;
+};
+
 int main(void) {
 
 	int nbGagnants = scanLineAsInt();
-	printf("nbGagnants = %i\n",nbGagnants);
+	// printf("nbGagnants = %i\n",nbGagnants);
 
 	Winner *t;
 	t = (Winner *) calloc(nbGagnants, sizeof(Winner));
 	readWinners(t, nbGagnants);
 	// printWinners(t, nbGagnants);
+
 	// infosAnnee(t, nbGagnants, argv[2]);
+
 	Winner *tTri;
 	tTri = (Winner *) calloc(nbGagnants, sizeof(Winner));
 	sortTuringWinnersByYear(t, tTri, nbGagnants);
-	printWinners(tTri, nbGagnants);
+	// printWinners(tTri, nbGagnants);
+
+	Winner *tAgrandi = addNewWinner(tTri, &nbGagnants);
+	printWinners(tAgrandi, nbGagnants);
+
+	for(int k=0; k<nbGagnants; k++) {
+		free(t[k].Nom);
+		free(t[k].Raison);
+	}
+	free(tAgrandi);
+	free(tTri);
 	free(t);
 
 	return EXIT_SUCCESS;
