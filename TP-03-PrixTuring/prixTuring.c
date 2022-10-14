@@ -52,13 +52,13 @@ typedef struct {
 	char *Raison;
 } Winner;
 
-void readUnWinner(Winner *t, int index){
+void readUnWinner(Winner *t, int index) {
 	t[index].Annee = scanLineAsInt();
 	t[index].Nom = scanLine();
 	t[index].Raison = scanLine();
 }
 
-void readWinners(Winner *t, unsigned int N){
+void readWinners(Winner *t, unsigned int N) {
 	int i;
 	for(i=0; i<N; i++) {
 		readUnWinner(t, i);
@@ -71,10 +71,43 @@ void printUnWinner(Winner w) {
 	printf("%s\n", w.Raison);
 }
 
-void printWinners(Winner *t, unsigned int N){
+void printWinners(Winner *t, unsigned int N) {
 	int i;
 	for(i=0; i<N; i++) {
 		printUnWinner(t[i]);
+	}
+}
+
+void infosAnnee(Winner *t, unsigned int N, unsigned int an) {
+	unsigned int i = 0;
+	while ((t[i].Annee != an) && (i<N)) {
+		i++;
+	}
+	if (i<N) {
+		printUnWinner(t[i]);
+	}else {
+		printf("Cette année n'est pas dans la liste!");
+	}
+}
+
+plusAncienWinnerAPartirDe(unsigned int anneeDepart, Winner *t, unsigned int N) {
+	int indexDuPlusVieux = 0;
+	int i;
+	for (i=0; i<N; i++) {
+		if ((t[i].Annee > anneeDepart) && (t[i].Annee < t[indexDuPlusVieux].Annee)) {
+			indexDuPlusVieux = i;
+		}
+	}
+	return indexDuPlusVieux;
+}
+
+void sortTuringWinnersByYear(Winner *t, Winner *tTri, unsigned int N){
+	unsigned int anneeDepart = 1940;
+	int i;
+	for (i=0; i<N; i++) {
+		int index = plusAncienWinnerAPartirDe(anneeDepart, t, N);
+		tTri[i] = t[index];
+		anneeDepart = t[index].Annee;
 	}
 }
 
@@ -86,7 +119,12 @@ int main(void) {
 	Winner *t;
 	t = (Winner *) calloc(nbGagnants, sizeof(Winner));
 	readWinners(t, nbGagnants);
-	printWinners(t, nbGagnants);
+	// printWinners(t, nbGagnants);
+	// infosAnnee(t, nbGagnants, argv[2]);
+	Winner *tTri;
+	tTri = (Winner *) calloc(nbGagnants, sizeof(Winner));
+	sortTuringWinnersByYear(t, tTri, nbGagnants);
+	printWinners(tTri, nbGagnants);
 	free(t);
 
 	return EXIT_SUCCESS;
