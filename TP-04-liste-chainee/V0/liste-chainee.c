@@ -11,11 +11,11 @@ bool estVide(Liste l) {
 
 // créer une liste d'un seul élément contenant la valeur v
 Liste creer(Element v){
-	Cellule *c;
-	c=malloc(sizeof(Liste));
-	c->val = v;
-	c->suiv = NULL;
-	return c;
+	Liste l;
+	l=malloc(sizeof(Cellule));
+	l->val = v;
+	l->suiv = NULL;
+	return l;
 }
 
 // ajoute l'élément v en tete de la liste l
@@ -46,7 +46,13 @@ void afficheListe_i(Liste l) {
 
 // version recursive
 void afficheListe_r(Liste l) {
-	TODO;
+	if (l == NULL){
+		printf("\n");
+	}
+	else {
+		afficheElement(l->val);
+		afficheListe_r(l->suiv);
+	}
 }
 
 void detruireElement(Element e) {}
