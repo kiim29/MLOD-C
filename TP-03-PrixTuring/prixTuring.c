@@ -90,8 +90,14 @@ void infosAnnee(Winner *t, unsigned int N, unsigned int an) {
 	}
 }
 
-plusAncienWinnerAPartirDe(unsigned int anneeDepart, Winner *t, unsigned int N) {
-	int indexDuPlusVieux = 0;
+int indexDUnWinnerPasRange(int *winnersDejaRanges, unsigned int N) {
+	int i = 0;
+	while(winnersDejaRanges[i] == 1 && i<N) {i++;}
+	return(i);
+}
+
+int plusAncienWinnerAPartirDe(unsigned int anneeDepart, Winner *t, unsigned int N, int *winnersDejaRanges) {
+	int indexDuPlusVieux = indexDUnWinnerPasRange(winnersDejaRanges, N);
 	int i;
 	for (i=0; i<N; i++) {
 		if ((t[i].Annee > anneeDepart) && (t[i].Annee < t[indexDuPlusVieux].Annee)) {
@@ -104,10 +110,16 @@ plusAncienWinnerAPartirDe(unsigned int anneeDepart, Winner *t, unsigned int N) {
 void sortTuringWinnersByYear(Winner *t, Winner *tTri, unsigned int N){
 	unsigned int anneeDepart = 1940;
 	int i;
+	int index = 0;
+	int winnersDejaRanges[N];
 	for (i=0; i<N; i++) {
-		int index = plusAncienWinnerAPartirDe(anneeDepart, t, N);
+		winnersDejaRanges[i] = 0;
+	}
+	for (i=0; i<N; i++) {
+		index = plusAncienWinnerAPartirDe(anneeDepart, t, N, winnersDejaRanges);
 		tTri[i] = t[index];
 		anneeDepart = t[index].Annee;
+		winnersDejaRanges[index] = 1;
 	}
 }
 
