@@ -52,30 +52,29 @@ typedef struct {
 	char *Raison;
 } Winner;
 
-void readUnWinner(Winner **t, int index){
-	//truc du genre t[index].Annee = scanLine()
-	// puis t[index].Nom = scanLine()
-	// puis t[index].Raison = scanLine()
+void readUnWinner(Winner *t, int index){
+	t[index].Annee = scanLineAsInt();
+	t[index].Nom = scanLine();
+	t[index].Raison = scanLine();
 }
 
-void readWinners(Winner **tab, unsigned int N){
+void readWinners(Winner *t, unsigned int N){
 	int i;
-	for(i=0; i<N; i+=3) {
-		readUnWinner(tab, i);
+	for(i=0; i<N; i++) {
+		readUnWinner(t, i);
 	}
 }
 
 void printUnWinner(Winner w) {
 	printf("%i\n", w.Annee);
-	printf("%i\n", w.Nom);
-	printf("%i\n", w.Raison);
+	printf("%s\n", w.Nom);
+	printf("%s\n", w.Raison);
 }
 
 void printWinners(Winner *t, unsigned int N){
 	int i;
 	for(i=0; i<N; i++) {
 		printUnWinner(t[i]);
-		printf("\n");
 	}
 }
 
@@ -85,10 +84,10 @@ int main(void) {
 	printf("nbGagnants = %i\n",nbGagnants);
 
 	Winner *t;
-	//ptet t = (Winner *) malloc(nbGagnants, sizeof(Winner));
+	t = (Winner *) calloc(nbGagnants, sizeof(Winner));
 	readWinners(t, nbGagnants);
 	printWinners(t, nbGagnants);
-	// free(t);
+	free(t);
 
 	return EXIT_SUCCESS;
 }
