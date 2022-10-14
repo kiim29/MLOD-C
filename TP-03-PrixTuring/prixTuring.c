@@ -124,13 +124,10 @@ void sortTuringWinnersByYear(Winner *t, Winner *tTri, unsigned int N){
 }
 
 Winner *addNewWinner(Winner *tTri, int *pN) {
-	printf("blabla1\n");
 	Winner *tAgrandi = (Winner *) calloc(*pN+1, sizeof(Winner));
-	printf("er1\n");
 	for (int i=0; i<*pN-1; i++) {
 		tAgrandi[i] = tTri[i];
 	}
-	printf("er2\n");
 	scanf("Entrez la nouvelle annee : %i", &tAgrandi[*pN-1].Annee);
 	scanf("Entrez le.a nouveau.elle gagnant.e : %s", tAgrandi[*pN-1].Nom);
 	scanf("Entrez la raison : %s", tAgrandi[*pN-1].Raison);
