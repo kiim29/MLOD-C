@@ -11,12 +11,15 @@ bool estVide(Liste l) {
 
 // créer une liste d'un seul élément contenant la valeur v
 Liste creer(Element v){
-	return TODO;
+	Cellule c;
+	c.val = v;
+	c.suiv = NULL;
+	return &c;
 }
 
 // ajoute l'élément v en tete de la liste l
 Liste ajoutTete(Element v, Liste l) {
-	return TODO;
+	return TODO ;
 }
 
 
