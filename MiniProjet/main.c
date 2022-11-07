@@ -32,8 +32,8 @@ void DrawGreeny(int centreGreenyX, int centreGreenyY) {
 // def DrawObjects
 void DrawObjects(int nbreObjets) {
     for (int i=0; i<nbreObjets; i++) {
-        int centreX = random_number(800,450);
-        int centreY = random_number(800,450);
+        int centreX = random_number(0,800);
+        int centreY = random_number(0,450);
         float rayon = random_number(5,60);
         int numCouleur = random_number(0,6);
         Color tabCouleurs[] = {YELLOW, BLUE, ORANGE, PINK, PURPLE, RED};
