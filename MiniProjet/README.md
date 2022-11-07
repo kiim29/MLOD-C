@@ -10,12 +10,14 @@ Si le joueur trouve Greeny, il passe au niveau suivant.
 Le temps donné pour trouver Greeny raccourcit à chaque niveau, le but est de faire le plus grand nombre de niveaux possible.
 
 A faire : une grande carte, plein de petits objets de formes et couleurs différentes, Greeny
-La succession des niveaux, la disposition aléatoire des objets et de Greeny, le déplacement de la carte (zoom, drag etc)
+La succession des niveaux, la disposition aléatoire des objets et de Greeny, le déplacement de la carte (zoom, drag etc), s'assurer que Greeny n'est jamais complètement caché
 Idéalement : superposition partielle des objets pour que Greeny puisse être un petit peu caché.
-Eventuellement : high score et scrore courant (nombre de niveaux passés), décompte du temps qui fait du bruit...
+Eventuellement : high score et score courant (nombre de niveaux passés), décompte du temps qui fait du bruit...
 
 # Comment compiler
+gcc -o main main.c -Wall -std=c11 /home/bot/Raylib.git/src/libraylib.a -lm -lrt -ldl -lX11 -lGL -lpthread
 # Comment exécuter
+./main
 # Comment utiliser le projet
 screenshot(s) du jeu
 règles, touches, ...

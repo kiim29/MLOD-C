@@ -4,7 +4,7 @@
 #include <raymath.h>
 
 
-// generer un nombre aleatoire entre min_num et max_num
+// Fonction pour generer un nombre aleatoire entre min_num et max_num
 int random_number(int min_num, int max_num) {
     int result = 0, low_num = 0, hi_num = 0;
 
@@ -29,8 +29,8 @@ void DrawGreeny(int centreGreenyX, int centreGreenyY) {
     DrawCircle(centreGreenyX, centreGreenyY, rayonGreeny, GREEN);
 }
 
-// def DrawMultipleObjects
-void DrawMultipleObjects(int nbreObjets) {
+// def DrawObjects
+void DrawObjects(int nbreObjets) {
     for (int i=0; i<nbreObjets; i++) {
         int centreX = random_number(800,450);
         int centreY = random_number(800,450);
@@ -101,6 +101,12 @@ int main ()
 
             camera.zoom += (wheel*zoomIncrement);
             if (camera.zoom < zoomIncrement) camera.zoom = zoomIncrement;
+        }
+
+        // Clic sur Greeny
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            //traitement à faire
         }
 
         //----------------------------------------------------------------------------------
