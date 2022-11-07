@@ -5,7 +5,8 @@ int somme(int t[], int nbElem) { //Calcule la somme des éléments du tableau t 
     for (int i=0; i<nbElem; i++) {
         res += t[i];
     }
-}
+    return res;
+} //Apparemment ne fonctionne pas du tout
 
 void repeat(int tab1[], int nbElem1, int tab2[], int nbElem2, int tRes[]) { //Fonction repeat
     int sommeTab1 = somme(tab1, nbElem1);
@@ -28,6 +29,7 @@ int main(void) { //Fonction main
 
     //Calcul et affichage du résultat
     int SIZE = somme(t1, nbElemT1);
+    printf("%d\n", SIZE);
     int tRes[SIZE];
     repeat(t1, nbElemT1, t2, nbElemT2, tRes);
     for (int j=0; j<SIZE; j++) {
