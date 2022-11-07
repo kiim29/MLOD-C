@@ -29,7 +29,6 @@ int main(void) { //Fonction main
 
     //Calcul et affichage du résultat
     int SIZE = somme(t1, nbElemT1);
-    printf("%d\n", SIZE);
     int tRes[SIZE];
     repeat(t1, nbElemT1, t2, nbElemT2, tRes);
     for (int j=0; j<SIZE; j++) {
