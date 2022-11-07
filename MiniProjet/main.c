@@ -1,7 +1,49 @@
-#include "raylib.h"
+#include <raylib.h>
 
-#include "rlgl.h"
-#include "raymath.h"
+#include <rlgl.h>
+#include <raymath.h>
+
+
+// generer un nombre aleatoire entre min_num et max_num
+int random_number(int min_num, int max_num) {
+    int result = 0, low_num = 0, hi_num = 0;
+
+    if (min_num < max_num)
+    {
+        low_num = min_num;
+        hi_num = max_num + 1; // include max_num in output
+    } else {
+        low_num = max_num + 1; // include max_num in output
+        hi_num = min_num;
+    }
+
+    // srand(time(NULL));
+    result = (rand() % (hi_num - low_num)) + low_num;
+    return result;
+}
+
+
+// def DrawGreeny
+void DrawGreeny(int centreGreenyX, int centreGreenyY) {
+    float rayonGreeny = 10;
+    DrawCircle(centreGreenyX, centreGreenyY, rayonGreeny, GREEN);
+}
+
+// def DrawMultipleObjects
+void DrawMultipleObjects(int nbreObjets) {
+    for (int i=0; i<nbreObjets; i++) {
+        int centreX = random_number(800,450);
+        int centreY = random_number(800,450);
+        float rayon = random_number(5,60);
+        int numCouleur = random_number(0,6);
+        Color tabCouleurs[] = {YELLOW, BLUE, ORANGE, PINK, PURPLE, RED};
+        Color couleur = tabCouleurs [numCouleur];
+        DrawCircle(centreX, centreY, rayon, couleur);
+    }
+}
+
+
+
 
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -19,7 +61,12 @@ int main ()
     camera.zoom = 1.0f;
 
     SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
+
+    const int centreGreenyX = random_number(0,800);
+    const int centreGreenyY = random_number(0,450);
     //--------------------------------------------------------------------------------------
+
+    // constantes de position de Greeny
 
     // Main game loop
     while (!WindowShouldClose())        // Detect window close button or ESC key
@@ -75,10 +122,16 @@ int main ()
 
                 // Draw a reference circle
                 DrawCircle(100, 100, 50, YELLOW);
+
+                // Draw plenty of random (not green) objects
+                DrawObjects(500);
+
+                // Draw Greeny
+                DrawGreeny(centreGreenyX, centreGreenyY);
                 
             EndMode2D();
 
-            DrawText("Mouse right button drag to move, mouse wheel to zoom", 10, 10, 20, WHITE);
+            DrawText("Où est Greeny ? Mouse right button drag to move, mouse wheel to zoom, mouse left button to click on Greeny", 10, 10, 20, WHITE);
         
         EndDrawing();
         //----------------------------------------------------------------------------------
