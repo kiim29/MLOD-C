@@ -6,7 +6,7 @@ int somme(int t[], int nbElem) { //Calcule la somme des éléments du tableau t 
         res += t[i];
     }
     return res;
-} //Apparemment ne fonctionne pas du tout
+}
 
 void repeat(int tab1[], int nbElem1, int tab2[], int nbElem2, int tRes[]) { //Fonction repeat
     int sommeTab1 = somme(tab1, nbElem1);
