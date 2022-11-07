@@ -7,7 +7,7 @@ int somme(int t[], int nbElem) { //Calcule la somme des éléments du tableau t 
     }
 }
 
-repeat(int tab1[], int nbElem1, int tab2[], int nbElem2, int tRes[]) { //Fonction repeat
+void repeat(int tab1[], int nbElem1, int tab2[], int nbElem2, int tRes[]) { //Fonction repeat
     int sommeTab1 = somme(tab1, nbElem1);
     int indiceCourant = 0;
     for (int i=0; i<nbElem1; i++) {
