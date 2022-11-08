@@ -10,7 +10,7 @@ bool estVide(Liste l) {
 // créer une liste d'un seul élément contenant la valeur v
 Liste creer(Element v){
 	Liste l=malloc(sizeof(Cellule));
-	if(l!=NULL) {
+	if(!estVide(l)) {
 		l->val = v;
 		l->suiv = NULL;
 	}
