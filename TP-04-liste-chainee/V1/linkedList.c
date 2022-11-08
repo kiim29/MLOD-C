@@ -1,4 +1,4 @@
-#include "liste-chainee.h"
+#include "linkedList.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -27,10 +27,6 @@ Liste ajoutTete(Element v, Liste l) {
 	return newListe;
 }
 
-void afficheElement(Element e) {
-	printf("%i ",e);
-}
-
 // affiche tous les éléments de la liste l
 // Attention, cette fonction doit être indépendante du type des éléments de la liste
 // utiliser une fonction annexe affiche_element
@@ -55,8 +51,6 @@ void afficheListe_r(Liste l) {
 		afficheListe_r(l->suiv);
 	}
 }
-
-void detruireElement(Element e) {} //Rien à faire tant que les éléments sont des int
 
 // Détruit tous les éléments de la liste l
 // version itérative
@@ -104,11 +98,6 @@ Liste ajoutFin_r(Element v, Liste l) {
 	}
 }
 
-// compare deux elements
-bool equalsElement(Element e1, Element e2){
-	return e1 == e2;
-}
-
 // Retourne un pointeur sur l'élément de la liste l contenant la valeur v ou NULL
 // version itérative
 Liste cherche_i(Element v,Liste l) {
@@ -120,7 +109,7 @@ Liste cherche_i(Element v,Liste l) {
 
 // version récursive
 Liste cherche_r(Element v,Liste l) {
-	if (estVide(l) || equalsElement(l->val, v)) {
+	if (estVide(l || equalsElement(l->val, v))) {
 		return l;
 	}
 	else {
@@ -133,12 +122,9 @@ Liste cherche_r(Element v,Liste l) {
 // version itérative
 Liste retirePremier_i(Element v, Liste l) {
 	Liste listeDeRech = cherche_i(v, l);
-	if(!estVide(listeDeRech)) {
-		if(equalsElement(l->val,v)) {
-			Liste p = l->suiv;
-			l->suiv = NULL;
-			detruire_r(l);
-			return p;
+	if(listeDeRech != NULL) {
+		if(l->val == v) {
+			return l->suiv;
 		}
 		else {
 			Liste newL = l;
@@ -146,21 +132,17 @@ Liste retirePremier_i(Element v, Liste l) {
 				newL = newL->suiv;
 			}
 			newL->suiv = listeDeRech->suiv;
-			listeDeRech->suiv = NULL;
-			detruire_r(listeDeRech);
 			return(l);
 		}
 	}
 }
 
+
 // version recursive
 Liste retirePremier_r(Element v, Liste l) {
 	if (!estVide(l)) {
-		if (equalsElement(l->val,v)) {
-			Liste p = l->suiv;
-			l->suiv = NULL;
-			detruire_r(l);
-			return p;
+		if (l->val == v) {
+			return l->suiv;
 		}
 		else {
 			l->suiv = retirePremier_r(v, l->suiv);
