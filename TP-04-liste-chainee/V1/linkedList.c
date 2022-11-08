@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define TODO NULL;
-
 // retourne vrai si l est vide et faux sinon
 bool estVide(Liste l) {
 	return l == NULL;
@@ -109,7 +107,7 @@ Liste cherche_i(Element v,Liste l) {
 
 // version récursive
 Liste cherche_r(Element v,Liste l) {
-	if (estVide(l || equalsElement(l->val, v))) {
+	if (estVide(l) || equalsElement(l->val, v)) {
 		return l;
 	}
 	else {
@@ -122,9 +120,12 @@ Liste cherche_r(Element v,Liste l) {
 // version itérative
 Liste retirePremier_i(Element v, Liste l) {
 	Liste listeDeRech = cherche_i(v, l);
-	if(listeDeRech != NULL) {
-		if(l->val == v) {
-			return l->suiv;
+	if(!estVide(listeDeRech)) {
+		if(equalsElement(l->val,v)) {
+			Liste p = l->suiv;
+			l->suiv = NULL;
+			detruire_r(l);
+			return p;
 		}
 		else {
 			Liste newL = l;
@@ -132,17 +133,21 @@ Liste retirePremier_i(Element v, Liste l) {
 				newL = newL->suiv;
 			}
 			newL->suiv = listeDeRech->suiv;
+			listeDeRech->suiv = NULL;
+			detruire_r(listeDeRech);
 			return(l);
 		}
 	}
 }
 
-
 // version recursive
 Liste retirePremier_r(Element v, Liste l) {
 	if (!estVide(l)) {
-		if (l->val == v) {
-			return l->suiv;
+		if (equalsElement(l->val,v)) {
+			Liste p = l->suiv;
+			l->suiv = NULL;
+			detruire_r(l);
+			return p;
 		}
 		else {
 			l->suiv = retirePremier_r(v, l->suiv);
