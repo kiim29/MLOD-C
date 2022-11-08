@@ -27,9 +27,9 @@ int main(void) {
 	l = ajoutTete("tranquille",l);
 	l = ajoutTete("t",l);
 	l = ajoutTete("weee",l);
-	l = ajoutTete("weEe",l);
 	l = ajoutTete("travail",l);
-	l = ajoutTete("t",l);
+	l = ajoutTete("vraiment",l);
+	l = ajoutTete("jeu",l);
 	l = ajoutTete("travail",l);
 
 	afficheListe_i(l);
