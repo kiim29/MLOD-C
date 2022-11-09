@@ -25,7 +25,7 @@ void ajouterNCaracteresAPartirDe(char* chaine, int indice, int nbCharAAjouter, c
     }
 }
 
-String string_new(char* chaine) {
+String string_new(char* chaine) { //Ne fonctionne pas
     int size = strlen(chaine);
     int chunkSizeDuDernier = size % 5;
     String s = malloc(sizeof(Chunk));
@@ -49,9 +49,13 @@ String string_new(char* chaine) {
 
 // QUESTION 3
 // Il manque la fonction d'affichage : si on ne peut pas afficher les String, on ne peut rien tester.
+// Signature :
+void afficher_string(String s);
+//Implémentation :
+void afficher_string(String s){
 
-
+}
 
 int main(void) {
-    String s = string_new("Hello !");
+    String s = string_new("Hello !"); //erreur de segmentation, ma fonction string_new ne fonctionne pas du tout
 }
