@@ -1,19 +1,11 @@
 
 #include "linkedList.h"
+#include "linkedListOfMusic.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 
-
-typedef struct {
-	char *Name;
-	char *Artist;
-	char *Album;
-	char *Genre;
-	unsigned int DiscNum;
-	unsigned int TrackNum;
-	unsigned int Year;
-} Musique;
 
 void afficheElement(Element e) {
     printf("%s - ", ((Musique *)e)->Name);
@@ -23,11 +15,15 @@ void afficheElement(Element e) {
     printf("%i - ", ((Musique *)e)->DiscNum);
     printf("%i - ", ((Musique *)e)->TrackNum);
     printf("%i", ((Musique *)e)->Year);
-};
+}
 
 void detruireElement(Element e) {
-    free((Musique *)e);
-};
+    free (((Musique *)e)->Name);
+    free (((Musique *)e)->Artist);
+    free (((Musique *)e)->Album);
+    free (((Musique *)e)->Genre);
+    free((Musique*)e);
+}
 
 bool equalsElement(Element e1, Element e2) {
     return (
@@ -39,4 +35,4 @@ bool equalsElement(Element e1, Element e2) {
         (((Musique *)e1)->TrackNum == ((Musique *)e2)->TrackNum) &&
         (((Musique *)e1)->Year == ((Musique *)e2)->Year)
     );
-};
+}

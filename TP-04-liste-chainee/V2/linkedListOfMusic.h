@@ -1,0 +1,21 @@
+#include "linkedList.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+
+typedef struct {
+	char *Name;
+	char *Artist;
+	char *Album;
+	char *Genre;
+	unsigned int DiscNum;
+	unsigned int TrackNum;
+	unsigned int Year;
+} Musique;
+
+Musique* creerUneMusique(char*);
+
+Liste creerLaListeDesMusiques(FILE* f);
+
+// typedef Element Musique;
