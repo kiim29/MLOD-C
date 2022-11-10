@@ -16,6 +16,8 @@ typedef struct {
 
 Musique* creerUneMusique(char*);
 
-Liste creerLaListeDesMusiques(FILE* f);
+// Liste creerLaListeDesMusiques(FILE* f);
+
+void creerLaListeDesMusiques(FILE* f, Liste l);
 
 // typedef Element Musique;
