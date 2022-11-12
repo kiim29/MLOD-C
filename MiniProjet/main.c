@@ -2,6 +2,7 @@
 
 #include <rlgl.h>
 #include <raymath.h>
+#include <stdio.h>
 
 
 // Fonction pour generer un nombre aleatoire entre min_num et max_num
@@ -41,13 +42,18 @@ void DrawObjects(int centresX[], int centresY[], float rayons[], Color couleurs[
 }
 
 
+// def estSurGreeny
+bool estSurGreeny(Vector2 pos, int xGreeny, int yGreeny) {
+    return((pos.x > xGreeny-25) && (pos.x < xGreeny+25) && (pos.y > yGreeny-25) && (pos.y < yGreeny+25));
+}
+
 
 
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
 int main () {
-    
+
     // INITIALISATION
     //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
@@ -64,6 +70,8 @@ int main () {
     // INITIALISATION DE GREENY : constantes de position de Greeny
     const int centreGreenyX = random_number(0,800);
     const int centreGreenyY = random_number(0,450);
+
+    bool greenyEstTrouve = false;
 
 
     // INITIALISATION DES OBJETS : constantes de position et caractéristiques des objets aléatoires
@@ -119,41 +127,72 @@ int main () {
             if (camera.zoom < zoomIncrement) camera.zoom = zoomIncrement;
         }
 
-        // Clic sur Greeny
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-        {
-            //traitement à faire
+        // Clic sur Greeny passe le booleen greenyEstTrouve à true
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            Vector2 mousePos = GetMousePosition();
+
+            printf("%s", "detecte le clic");
+            // printf("%d", estSurGreeny(mousePos, centreGreenyX, centreGreenyY));
+            printf("X = %f - ", mousePos.x);
+            printf("Y = %f        ", mousePos.y);
+            printf("GreenyX = %i - ", centreGreenyX);
+            printf("GreenyY = %i - \n", centreGreenyY);
+
+
+            if (estSurGreeny(mousePos, centreGreenyX, centreGreenyY)) {
+                greenyEstTrouve = true;
+                printf("%s", "trouvé \n");
+            }
         }
+
+            BeginDrawing();
+        
+        switch (greenyEstTrouve) {
+            
+            case true: {  //En cas de victoire (Greeny est trouvé)
+                ClearBackground(GREEN);
+                DrawText("VICTOIRE !", 50, 50, 40, WHITE);
+            } break;
+
+            default: {
+
+        
 
         //----------------------------------------------------------------------------------
 
         // Draw
         //----------------------------------------------------------------------------------
-        BeginDrawing();
-            ClearBackground(BLACK);
+        // if (!greenyEstTrouve) {
+            
+                ClearBackground(BLACK);
 
-            BeginMode2D(camera);
+                BeginMode2D(camera);
 
-                // Draw the 3d grid, rotated 90 degrees and centered around 0,0 
-                // just so we have something in the XY plane
-                rlPushMatrix();
-                    rlTranslatef(0, 25*50, 0);
-                    rlRotatef(90, 1, 0, 0);
-                    DrawGrid(100, 50);
-                rlPopMatrix();
+                    // Draw the 3d grid, rotated 90 degrees and centered around 0,0 
+                    // just so we have something in the XY plane
+                    rlPushMatrix();
+                        rlTranslatef(0, 25*50, 0);
+                        rlRotatef(90, 1, 0, 0);
+                        DrawGrid(100, 50);
+                    rlPopMatrix();
 
-                // Draw plenty of random (not green) objects
-                DrawObjects(centresCerclesX, centresCerclesY, rayonsCercles, couleursCercles);
+                    // Draw plenty of random (not green) objects
+                    DrawObjects(centresCerclesX, centresCerclesY, rayonsCercles, couleursCercles);
 
-                // Draw Greeny
-                // DrawGreeny(centreGreenyX, centreGreenyY);
-                DrawGreeny(0, 0);
-                
-            EndMode2D();
+                    // Draw Greeny
+                    DrawGreeny(centreGreenyX, centreGreenyY);
+                    // DrawGreeny(0, 0);
+                    
+                EndMode2D();
 
-            DrawText("Où est Greeny ? \nMouse right button drag to move, mouse wheel to zoom. \nMouse left button to click on Greeny.", 10, 10, 20, WHITE);
+                DrawText("Où est Greeny ? \nMouse right button drag to move, mouse wheel to zoom. \nMouse left button to click on Greeny.", 10, 10, 20, WHITE);
         
-        EndDrawing();
+        }
+
+
+            }
+            EndDrawing();
+        // }
         //----------------------------------------------------------------------------------
     }
 
