@@ -1,42 +1,27 @@
-#include <raylib.h>
 
+#include <raylib.h>
 #include <rlgl.h>
 #include <raymath.h>
 #include <stdio.h>
 
 
-// // Fonction pour generer un nombre aleatoire entre min_num et max_num  //INUTILE
-// int random_number(int min_num, int max_num) {
-//     int result = 0, low_num = 0, hi_num = 0;
+//Code de mon jeu raylib : OÙ EST GREENY?
 
-//     if (min_num < max_num)
-//     {
-//         low_num = min_num;
-//         hi_num = max_num + 1; // include max_num in output
-//     } else {
-//         low_num = max_num + 1; // include max_num in output
-//         hi_num = min_num;
-//     }
 
-//     // srand(time(NULL));
-//     result = (rand() % (hi_num - low_num)) + low_num;
-//     return result;
-// }
-
-//def rayonGreeny
+//********************************************FONCTIONS UTILES********************************************//
+//def rayonGreeny : quel rayon pour Greeny (plus il est petit, plus le jeu est difficile)
 int rayonGreeny() {
     return 20;
 }
 
-// def DrawGreeny
+// def DrawGreeny : dessine Greeny
 void DrawGreeny(int centreGreenyX, int centreGreenyY) {
-    // float rayonGreeny = rayonGreeny();
     DrawCircle(centreGreenyX, centreGreenyY, rayonGreeny(), GREEN);
 }
 
-// def DrawObjects
+// def DrawObjects : dessine les objets dont les coordonnées et caractéristiques sont passées en paramètres
 void DrawObjects(int centresX[], int centresY[], float rayons[], Color couleurs[]) {
-    for (int i=0; i<2000; i++) {
+    for (int i=0; i<2500; i++) {
         int centreX = centresX[i];
         int centreY = centresY[i];
         float rayon = rayons[i];
@@ -45,18 +30,18 @@ void DrawObjects(int centresX[], int centresY[], float rayons[], Color couleurs[
     }
 }
 
-// def estSurGreeny
+// def estSurGreeny : vérifie si une position pos est située sur le cercle de Greeny
 bool estSurGreeny(Vector2 pos, int xGreeny, int yGreeny) {
-    return((pos.x > xGreeny-rayonGreeny()) && (pos.x < xGreeny+rayonGreeny()) && (pos.y > yGreeny-rayonGreeny()) && (pos.y < yGreeny+rayonGreeny()));
+    Vector2 centGreeny;
+    centGreeny.x = xGreeny;
+    centGreeny.y = yGreeny;
+    return CheckCollisionPointCircle(pos, centGreeny, rayonGreeny());
 }
-// bool estSurGreeny(Vector2 pos, Vector2 posGreeny) {
-//     return((pos.x > posGreeny.x-25) && (pos.x < posGreeny.x+25) && (pos.y > posGreeny.y-25) && (pos.y < posGreeny.y+25));
-// }
-
+//******************************************************************************************************//
 
 
 //------------------------------------------------------------------------------------
-// Program main entry point
+// ENTRÉE DU PROGRAMME
 //------------------------------------------------------------------------------------
 int main () {
 
@@ -76,22 +61,16 @@ int main () {
 
 
     // INITIALISATION DE GREENY : constantes de position d'affichage de Greeny
-    // const int centreGreenyX = GetRandomValue(0,800);
-    // const int centreGreenyY = GetRandomValue(0,450);
     const int centreGreenyX = GetRandomValue(-2400,2400);
     const int centreGreenyY = GetRandomValue(-1150,1150);
-    // Variable de position de Greeny relative au déplacement //INUTILEs
-    // Vector2 posGreeny;
-    // posGreeny.x = (float)centreGreenyX;
-    // posGreeny.y = (float)centreGreenyY;
 
-    // bool greenyEstTrouve = false;
+
+    //SITUATION DU JEU - La situation peut être 1 : Greeny est trouvé (victoire) et 2 : Temps écoulé (défaite)
     int situation = 0; //jeu de base
-    //La situation peut aussi être 1 : Greeny est trouvé (victoire) et 2 : Temps écoulé (défaite)
 
 
     // INITIALISATION DES OBJETS : constantes de position et caractéristiques des objets aléatoires
-    const int nbrObjets = 2000;
+    const int nbrObjets = 2500;
     int centresCerclesX[nbrObjets];
     int centresCerclesY[nbrObjets];
     float rayonsCercles[nbrObjets];
@@ -108,8 +87,8 @@ int main () {
 
 
 
-    // Main game loop
-    while (!WindowShouldClose()) {         // Detect window close button or ESC key
+    // BOUCLE PRINCIPALE
+    while (!WindowShouldClose()) { // Detect window close button or ESC key
 
         // Update
         //----------------------------------------------------------------------------------
@@ -118,7 +97,6 @@ int main () {
             Vector2 delta = GetMouseDelta();
             delta = Vector2Scale(delta, -1.0f/camera.zoom);
             camera.target = Vector2Add(camera.target, delta);
-            // posGreeny = Vector2Subtract(posGreeny, delta); //Mettre à jour la position de Greeny pour la souris
         }
 
         // Zoom based on mouse wheel
@@ -139,32 +117,14 @@ int main () {
 
             camera.zoom += (wheel*zoomIncrement);
             if (camera.zoom < zoomIncrement) camera.zoom = zoomIncrement;
-
-            // posGreeny = Vector2Scale(posGreeny, camera.zoom); VERY FALSE 
         }
 
         // Clic gauche sur Greeny passe le booleen greenyEstTrouve à true / passe la situation à 1
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             Vector2 mousePos = GetScreenToWorld2D(GetMousePosition(), camera);
-
-            // printf("%s", "detecte le clic");
-            // printf("%d", estSurGreeny(mousePos, centreGreenyX, centreGreenyY));
-            printf("X = %f - ", mousePos.x);
-            printf("Y = %f        ", mousePos.y);
-            printf("GreenyX = %i - ", centreGreenyX);
-            printf("GreenyY = %i - \n", centreGreenyY);
-            // printf("GreenyX = %f - ", posGreeny.x);
-            // printf("GreenyY = %f - \n", posGreeny.y);
-
             if (estSurGreeny(mousePos, centreGreenyX, centreGreenyY)) {
-                // greenyEstTrouve = true;
-                situation = 1; //on passe en "Victoire" 
-                printf("%s", "trouvé \n");
+                situation = 1; //on passe en "Victoire"
             }
-            // if (estSurGreeny(mousePos, posGreeny)) {
-            //     greenyEstTrouve = true;
-            //     printf("%s", "trouvé \n");
-            // }
         }
 
         // Actualise le décompte
@@ -172,7 +132,6 @@ int main () {
         if (t >= duree + 1.0) {
             duree = t;
         }
-        // printf("Temps restant : %f", (15.0-duree));
 
         // Vérifie si le temps est écoulé et que la victoire n'est pas encore atteinte
         // Si oui passage en défaite (situation 2)
@@ -182,7 +141,7 @@ int main () {
         //----------------------------------------------------------------------------------
 
 
-        // Draw
+        // DESSIN
         //----------------------------------------------------------------------------------
         BeginDrawing();
         
