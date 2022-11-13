@@ -5,16 +5,60 @@
 #include <string.h>
 #include <errno.h>
 
+//Ce fichier crée des segmentation faults mais je n'ai pas trouvé pourquoi.
+
 Musique* creerUneMusique(char* line) {
     Musique *mus = malloc(sizeof(Musique));
-    mus->Name = strdup(strsep(&line, ","));
-    // printf("%s\n", mus->Name);
-    mus->Artist = strdup(strsep(&line, ","));
-    mus->Album = strdup(strsep(&line, ","));
-    mus->Genre = strdup(strsep(&line, ","));
-    mus->DiscNum = atoi(strsep(&line, ","));
-    mus->TrackNum = atoi(strsep(&line, ","));
-    mus->Year = atoi(strsep(&line, ","));
+    char* tmp1 = strsep(&line, ",");
+    if (tmp1 != NULL) {
+        mus->Name = strdup(tmp1);
+    } else {
+        mus->Name = "Nom non renseigné";
+    }
+    // mus->Name = strdup(strsep(&line, ","));
+    char* tmp2 = strsep(&line, ",");
+    if (tmp2 != NULL) {
+        mus->Artist = strdup(tmp2);
+    } else {
+        mus->Artist = "Artiste non renseigné.e";
+    }
+    // mus->Artist = strdup(strsep(&line, ","));
+    char* tmp3 = strsep(&line, ",");
+    if (tmp3 != NULL) {
+        mus->Album = strdup(tmp3);
+    } else {
+        mus->Album = "Album non renseigné";
+    }
+    // mus->Album = strdup(strsep(&line, ","));
+    char* tmp4 = strsep(&line, ",");
+    if (tmp4 != NULL) {
+        mus->Genre = strdup(tmp4);
+    } else {
+        mus->Genre = "Genre non renseigné";
+    }
+    // mus->Genre = strdup(strsep(&line, ","));
+    char* tmp5 = strsep(&line, ",");
+    if (tmp5 != NULL) {
+        mus->DiscNum = atoi(tmp5);
+    } else {
+        mus->DiscNum = 0;
+    }
+    // mus->DiscNum = atoi(strsep(&line, ","));
+    char* tmp6 = strsep(&line, ",");
+    if (tmp6 != NULL) {
+        mus->TrackNum = atoi(tmp6);
+    } else {
+        mus->TrackNum = 0;
+    }
+    // mus->TrackNum = atoi(strsep(&line, ","));
+    char* tmp7 = strsep(&line, ",");
+    if (tmp7 != NULL) {
+        mus->Year = atoi(tmp7);
+    } else {
+        mus->Year = 0;
+    }
+    // mus->Year = atoi(strsep(&line, ","));
+
     // printf("%u\n", mus->Year);
     return mus;
 }
@@ -69,24 +113,21 @@ int main(void){
 
 
 
-
-    // JE N'ARRIVE MEME PAS A FAIRE FONCTIONNER CE TRUC SUR DES EXEMPLES
-    //TODO
-    //ALLEZ J'EN AI MARRE
+    // //Tests sur un élément
     // Musique musTest;
     // musTest.Album = "nomAlbum";
     // musTest.Artist = "blues sisteers";
     // musTest.DiscNum = 21;
     // musTest.Genre = "nomdu genre pop";
     // musTest.Name = "la chanson de la tartine";
-    // musTest.TrackNum = 8;
+    // // musTest.TrackNum = 8;
     // musTest.Year = 1999;
 
     // Liste lBis = malloc(sizeof(Liste));
     // printf("normalement la liste BIS\n");
-    // lBis = creer(musTest);
+    // lBis = creer(&musTest);
     // printf("normalement la liste BIS\n");
-    // // afficheListe_i(lBis);
+    // afficheListe_i(lBis);
 
 
 
@@ -95,7 +136,7 @@ int main(void){
     // Liste l = malloc(sizeof(Liste));
     // creerLaListeDesMusiques(f,l);
 
-    // afficheListe_i(l);
+    afficheListe_i(l);
     // afficheListe_r(l);
 
     // detruire_r(l);
