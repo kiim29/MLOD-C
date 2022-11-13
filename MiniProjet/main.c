@@ -41,10 +41,12 @@ void DrawObjects(int centresX[], int centresY[], float rayons[], Color couleurs[
     }
 }
 
-
 // def estSurGreeny
-bool estSurGreeny(Vector2 pos, int xGreeny, int yGreeny) {
-    return((pos.x > xGreeny-25) && (pos.x < xGreeny+25) && (pos.y > yGreeny-25) && (pos.y < yGreeny+25));
+// bool estSurGreeny(Vector2 pos, int xGreeny, int yGreeny) {
+//     return((pos.x > xGreeny-25) && (pos.x < xGreeny+25) && (pos.y > yGreeny-25) && (pos.y < yGreeny+25));
+// }
+bool estSurGreeny(Vector2 pos, Vector2 posGreeny) {
+    return((pos.x > posGreeny.x-25) && (pos.x < posGreeny.x+25) && (pos.y > posGreeny.y-25) && (pos.y < posGreeny.y+25));
 }
 
 
@@ -67,9 +69,13 @@ int main () {
     SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
 
 
-    // INITIALISATION DE GREENY : constantes de position de Greeny
+    // INITIALISATION DE GREENY : constantes de position d'affichage de Greeny
     const int centreGreenyX = random_number(0,800);
     const int centreGreenyY = random_number(0,450);
+    // Variable de position de Greeny relative au déplacement
+    Vector2 posGreeny;
+    posGreeny.x = (float)centreGreenyX;
+    posGreeny.y = (float)centreGreenyY;
 
     bool greenyEstTrouve = false;
 
@@ -92,8 +98,6 @@ int main () {
 
 
 
-
-
     // Main game loop
     while (!WindowShouldClose()) {         // Detect window close button or ESC key
 
@@ -103,8 +107,8 @@ int main () {
         if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
             Vector2 delta = GetMouseDelta();
             delta = Vector2Scale(delta, -1.0f/camera.zoom);
-
             camera.target = Vector2Add(camera.target, delta);
+            posGreeny = Vector2Subtract(posGreeny, delta); //Mettre à jour la position de Greeny pour la souris
         }
 
         // Zoom based on mouse wheel
@@ -125,45 +129,48 @@ int main () {
 
             camera.zoom += (wheel*zoomIncrement);
             if (camera.zoom < zoomIncrement) camera.zoom = zoomIncrement;
+
+            // posGreeny = Vector2Scale(posGreeny, camera.zoom); VERY FALSE // TODO 
         }
 
         // Clic sur Greeny passe le booleen greenyEstTrouve à true
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             Vector2 mousePos = GetMousePosition();
 
-            printf("%s", "detecte le clic");
+            // printf("%s", "detecte le clic");
             // printf("%d", estSurGreeny(mousePos, centreGreenyX, centreGreenyY));
             printf("X = %f - ", mousePos.x);
             printf("Y = %f        ", mousePos.y);
-            printf("GreenyX = %i - ", centreGreenyX);
-            printf("GreenyY = %i - \n", centreGreenyY);
+            // printf("GreenyX = %i - ", centreGreenyX);
+            // printf("GreenyY = %i - \n", centreGreenyY);
+            printf("GreenyX = %f - ", posGreeny.x);
+            printf("GreenyY = %f - \n", posGreeny.y);
 
-
-            if (estSurGreeny(mousePos, centreGreenyX, centreGreenyY)) {
+            // if (estSurGreeny(mousePos, centreGreenyX, centreGreenyY)) {
+            //     greenyEstTrouve = true;
+            //     printf("%s", "trouvé \n");
+            // }
+            if (estSurGreeny(mousePos, posGreeny)) {
                 greenyEstTrouve = true;
                 printf("%s", "trouvé \n");
             }
         }
 
-            BeginDrawing();
+        //----------------------------------------------------------------------------------
+
+        // Draw
+        //----------------------------------------------------------------------------------
+        BeginDrawing();
         
         switch (greenyEstTrouve) {
             
             case true: {  //En cas de victoire (Greeny est trouvé)
                 ClearBackground(GREEN);
                 DrawText("VICTOIRE !", 50, 50, 40, WHITE);
-            } break;
+            }
+            break;
 
-            default: {
-
-        
-
-        //----------------------------------------------------------------------------------
-
-        // Draw
-        //----------------------------------------------------------------------------------
-        // if (!greenyEstTrouve) {
-            
+            default: {  //Le reste du temps (Greeny n'est pas trouvé)
                 ClearBackground(BLACK);
 
                 BeginMode2D(camera);
@@ -185,14 +192,10 @@ int main () {
                     
                 EndMode2D();
 
-                DrawText("Où est Greeny ? \nMouse right button drag to move, mouse wheel to zoom. \nMouse left button to click on Greeny.", 10, 10, 20, WHITE);
-        
-        }
-
-
+                DrawText("Où est Greeny ?\nTenir le clic droit pour déplacer, Zoomer avec la roulette de la souris.\nClic gauche sur Greeny pour le trouver.", 10, 10, 20, WHITE);
             }
-            EndDrawing();
-        // }
+        }
+        EndDrawing();
         //----------------------------------------------------------------------------------
     }
 
