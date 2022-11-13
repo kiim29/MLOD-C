@@ -1,3 +1,6 @@
+// Comment compiler : gcc -W -Wall linkedList.c linkedListOfMusic.c mySpitofy.c -o mySpitofy
+
+
 #include "linkedList.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,8 +19,8 @@ typedef struct {
 
 Musique* creerUneMusique(char*);
 
-// Liste creerLaListeDesMusiques(FILE* f);
+Liste creerLaListeDesMusiques(FILE* f);
 
-void creerLaListeDesMusiques(FILE* f, Liste l);
+// void creerLaListeDesMusiques(FILE* f, Liste l);
 
 // typedef Element Musique;
