@@ -21,7 +21,7 @@ void DrawGreeny(int centreGreenyX, int centreGreenyY) {
 
 // def DrawObjects : dessine les objets dont les coordonnées et caractéristiques sont passées en paramètres
 void DrawObjects(int centresX[], int centresY[], float rayons[], Color couleurs[]) {
-    for (int i=0; i<2500; i++) {
+    for (int i=0; i<2000; i++) {
         int centreX = centresX[i];
         int centreY = centresY[i];
         float rayon = rayons[i];
@@ -70,7 +70,7 @@ int main () {
 
 
     // INITIALISATION DES OBJETS : constantes de position et caractéristiques des objets aléatoires
-    const int nbrObjets = 2500;
+    const int nbrObjets = 2000;
     int centresCerclesX[nbrObjets];
     int centresCerclesY[nbrObjets];
     float rayonsCercles[nbrObjets];
